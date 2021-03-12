@@ -180,12 +180,6 @@ echo "Starting webserver and WebSockets proxy on port ${PORT}"
 ${WEBSOCKIFY} ${SYSLOG_ARG} ${SSLONLY} --web ${WEB} ${CERT:+--cert ${CERT}} ${KEY:+--key ${KEY}} ${PORT} ${VNC_DEST} ${HEARTBEAT_ARG} ${IDLETIMEOUT_ARG} ${RECORD_ARG} ${TIMEOUT_ARG} &
 proxy_pid="$!"
 sleep 1
-if [ -n $(kill -0 ${proxy_pid}) ]
-then
-    proxy_pid=
-    echo "Failed to start WebSockets proxy"
-    exit 1
-fi
 
 echo -e "\n\nNavigate to this URL:\n"
 if [ "x$SSLONLY" == "x" ]; then
